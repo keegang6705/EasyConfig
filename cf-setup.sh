@@ -3,7 +3,7 @@
 # cf-setup: First-run setup and migration for EasyConfig (cf)
 # Copies system config to user directory, handles .ini → .conf migration
 
-VERSION="1.0.3"
+VERSION="1.1.0"
 
 USER_CONFIG_DIR="${HOME}/.config/easy-config"
 USER_CONFIG_FILE="${USER_CONFIG_DIR}/config.conf"

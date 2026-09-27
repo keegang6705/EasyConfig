@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="1.0.3"
+VERSION="1.1.0"
 
 if [ -f "${HOME}/.config/easy-config/config.conf" ]; then
     CONFIG_FILE="${HOME}/.config/easy-config/config.conf"
@@ -359,8 +359,13 @@ get_target() {
                 "${key}="*)
                     value="${line#*=}"
                     value="$(trim "$value")"
-                    printf '%s' "$value"
-                    return 0
+                    if [ -e "$value" ]; then
+                        printf '%s' "$value"
+                        return 0
+                    fi
+                    grep -Fv "${key}=" "$CACHE_FILE" > "$CACHE_FILE.tmp" 2>/dev/null || : > "$CACHE_FILE.tmp"
+                    mv "$CACHE_FILE.tmp" "$CACHE_FILE"
+                    break
                     ;;
             esac
         done < "$CACHE_FILE"

@@ -220,6 +220,34 @@ cf some-config     # If not in targets, searches using fd/find
 **Optional**:
 - `fzf` - Interactive selection (enable with `use_fzf=true`)
 - `fd` - Faster file searching (automatic fallback to find if not available)
+- `bash-completion`, `zsh`, or `fish` - Shell completion for target/alias names
+
+## Shell Completion
+
+Bash:
+```bash
+sudo install -Dm644 completions/cf.bash /usr/share/bash-completion/completions/cf
+```
+
+Zsh:
+```bash
+sudo install -Dm644 completions/cf.zsh /usr/share/zsh/site-functions/_cf
+```
+
+Fish:
+```bash
+sudo install -Dm644 completions/cf.fish /usr/share/fish/vendor_completions.d/cf.fish
+```
+
+All three are installed automatically by the AUR package. Completion reads target and alias names directly from your active config file.
+
+## Running Tests
+
+```bash
+sh tests/run_tests.sh
+```
+
+The suite is a self-contained POSIX script with no external test framework dependency. It runs automatically on push/PR via GitHub Actions alongside shellcheck.
 
 ## Troubleshooting
 
