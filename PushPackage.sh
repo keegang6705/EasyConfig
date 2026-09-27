@@ -3,6 +3,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+AUR_PACKAGE="easy-config"
 AUR_DIR="$(mktemp -d)"
 
 cleanup() {
@@ -35,7 +37,7 @@ if ! ssh-add -l 2>/dev/null | grep -q "$KEY_FINGERPRINT"; then
     ssh-add "$KEY_FILE"
 fi
 
-git clone "ssh://aur@aur.archlinux.org/easy-config.git" "$AUR_DIR"
+git clone "ssh://aur@aur.archlinux.org/$AUR_PACKAGE.git" "$AUR_DIR"
 
 find "$AUR_DIR" -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf -- {} +
 
